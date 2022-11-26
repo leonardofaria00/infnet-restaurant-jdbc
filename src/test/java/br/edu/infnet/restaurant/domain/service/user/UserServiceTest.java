@@ -31,7 +31,7 @@ public class UserServiceTest {
     @Test
     public void thenFindByIdUserWithError() {
         Assert.assertThrows(DataNotFoundException.class, () -> {
-            service.findById(999);
+            service.findById(99);
         });
     }
 
@@ -53,6 +53,20 @@ public class UserServiceTest {
     public void thenUpdateUserWithError() {
         Assert.assertThrows(DataNotFoundException.class, () -> {
             service.updateById(99, new User("José das Couves", 30));
+        });
+    }
+
+//    @Test
+//    public void thenDeleteByIdUserWithSuccess() {
+//        final User user = service.create(new User("Maria",50));
+//        service.deleteById(1);
+//        Assert.assertTrue("Success to delete User", true);
+//    }
+
+    @Test
+    public void thenDeleteByIdUserWithError() {
+        Assert.assertThrows(DataNotFoundException.class, () -> {
+            service.deleteById(99);
         });
     }
 }

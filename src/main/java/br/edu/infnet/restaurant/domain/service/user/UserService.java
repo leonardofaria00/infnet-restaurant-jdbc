@@ -30,4 +30,8 @@ public class UserService {
     public User updateById(final Integer id, final User user) {
         return userRepository.updateById(id, user);
     }
+
+    public void deleteById(final Integer id) {
+        userRepository.deleteById(id);
+    }
 }

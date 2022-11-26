@@ -26,7 +26,6 @@ public class UserRepositoryImpl extends JdbcDAO implements UserRepository {
             sqlException.getStackTrace();
             throw new RuntimeException(String.format("Error to insert user with message: %s", sqlException.getMessage()));
         }
-
     }
 
     @Override
@@ -86,6 +85,24 @@ public class UserRepositoryImpl extends JdbcDAO implements UserRepository {
         } catch (final SQLException sqlException) {
             throw new RuntimeException(sqlException.getMessage());
         }
+    }
+
+    @Override
+    public void deleteById(final Integer id) {
+        try {
+            final String sql = "delete from user where id = ?";
+            final PreparedStatement prepareStatement = getPrepareStatement(sql);
+            prepareStatement.setInt(1, id);
+
+            final Integer resultCode = prepareStatement.executeUpdate();
+            validateDeleteResult(id, resultCode);
+        } catch (final SQLException sqlException) {
+            throw new RuntimeException(sqlException.getMessage());
+        }
+    }
+
+    private void validateDeleteResult(final Integer id, final Integer resultCode) {
+        if (resultCode == 0) throw new DataNotFoundException(String.format("Error to delete user with id: %s", id));
     }
 
     private static void validateUpdateResult(final Integer id, final int resultCode) {
