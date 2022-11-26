@@ -89,7 +89,7 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>br.edu.infnet.restaurant.Main</mainClass>
+                                <mainClass>br.edu.infnet.restaurant.Application</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
