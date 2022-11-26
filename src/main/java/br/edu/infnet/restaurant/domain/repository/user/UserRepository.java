@@ -12,4 +12,6 @@ public interface UserRepository {
     Optional<User> findById(Integer id);
 
     List<User> findAll();
+
+    User updateById(Integer id, User user);
 }

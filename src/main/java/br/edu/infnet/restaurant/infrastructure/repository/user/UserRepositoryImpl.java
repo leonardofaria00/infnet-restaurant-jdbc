@@ -1,6 +1,7 @@
 package br.edu.infnet.restaurant.infrastructure.repository.user;
 
 import br.edu.infnet.restaurant.domain.data.model.User;
+import br.edu.infnet.restaurant.domain.exceptions.DataNotFoundException;
 import br.edu.infnet.restaurant.domain.repository.user.UserRepository;
 import br.edu.infnet.restaurant.infrastructure.util.JdbcDAO;
 
@@ -66,6 +67,29 @@ public class UserRepositoryImpl extends JdbcDAO implements UserRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public User updateById(final Integer id, final User user) {
+        try {
+            final String sql = "update user set name = ?, age = ? where id = ?";
+            final PreparedStatement prepareStatement = getPrepareStatement(sql);
+            prepareStatement.setString(1, user.getName());
+            prepareStatement.setInt(2, user.getAge());
+            prepareStatement.setInt(3, id);
+
+            final int resultCode = prepareStatement.executeUpdate();
+
+            validateUpdateResult(id, resultCode);
+
+            return findById(id).get();
+        } catch (final SQLException sqlException) {
+            throw new RuntimeException(sqlException.getMessage());
+        }
+    }
+
+    private static void validateUpdateResult(final Integer id, final int resultCode) {
+        if (resultCode == 0) throw new DataNotFoundException(String.format("Error to update User with id: %s", id));
     }
 
     private PreparedStatement getPrepareStatement(final String sql) throws SQLException {

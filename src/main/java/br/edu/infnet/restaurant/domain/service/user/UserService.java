@@ -26,4 +26,8 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    public User updateById(final Integer id, final User user) {
+        return userRepository.updateById(id, user);
+    }
 }

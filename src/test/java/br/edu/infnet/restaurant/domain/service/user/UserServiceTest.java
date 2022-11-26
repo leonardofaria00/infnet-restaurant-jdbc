@@ -41,4 +41,18 @@ public class UserServiceTest {
         Assert.assertNotNull(user);
         Assert.assertTrue("Success to find all Users", true);
     }
+
+    @Test
+    public void thenUpdateUserWithSuccess() {
+        final User user = service.updateById(1, new User("José das Couves", 30));
+        Assert.assertNotNull(user);
+        Assert.assertTrue("Success to change User", true);
+    }
+
+    @Test
+    public void thenUpdateUserWithError() {
+        Assert.assertThrows(DataNotFoundException.class, () -> {
+            service.updateById(99, new User("José das Couves", 30));
+        });
+    }
 }
