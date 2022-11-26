@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+    mysql:
+        image: mysql:5.7
+        restart: always
+        container_name: mysql-infnet
+        environment:
+            MYSQL_DATABASE: infnetRestaurantJDBC
+            MYSQL_ROOT_USE: root
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - '3306:3306'
+        volumes:
+            - ./mysql:/var/lib/mysql
