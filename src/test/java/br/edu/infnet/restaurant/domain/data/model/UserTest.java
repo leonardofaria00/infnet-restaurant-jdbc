@@ -1,6 +1,6 @@
 package br.edu.infnet.restaurant.domain.data.model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class UserTest {
 

@@ -1,7 +1,7 @@
 package br.edu.infnet.restaurant.infrastructure.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,11 +10,10 @@ public class JdbcUtilTest {
 
     @Test
     public void getConnection() {
-        try (final Connection connection = JdbcUtil.getConnection();) {
-            Assert.assertTrue("Success to connect", true);
-            System.out.println("Success to connect");
+        try (final Connection connection = JdbcUtil.getConnection()) {
+            Assertions.assertTrue(true, "Success to connect");
         } catch (final SQLException sqlException) {
-            Assert.fail();
+            Assertions.fail();
         }
     }
 }
